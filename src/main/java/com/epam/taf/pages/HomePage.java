@@ -20,7 +20,7 @@ public class HomePage extends AbstractPage {
     //@FindBy (xpath = "//a[@href='/ctrack/actor/menu.jsp?action=readonly'][@class='first-menu'])")
     //private WebElement EntityManagementMenuUnderTopMenu;
     //private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//a[@href='/ctrack/actor/menu.jsp?action=readonly'][@class='first-menu'])");
-    private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//a[@href='href='/ctrack/admin/menuUserAdmin.jsp?action=readonly'][@class='first-menu'])");
+    private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//a[@href='/ctrack/admin/menuUserAdmin.jsp?action=readonly'][@onclick='menuHeaderClose();']");
     // href="/ctrack/admin/menuUserAdmin.jsp?action=readonly
     //private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//div[@class='menu-header-dropdown menu-selected']/a[contains(text(),'Entity Management')]");
 
@@ -36,7 +36,7 @@ public class HomePage extends AbstractPage {
         //administrativeTopMenu.click();
 
         //new Actions(driver).click(administrativeTopMenu).build().perform();
-        new Actions(driver).moveToElement(administrativeTopMenu).build().perform();
+        new Actions(driver).moveToElement(administrativeTopMenu).click(driver.findElement(ENTITY_MANAGEMENT_ITEM)).build().perform();
 
         //waitForElementVisible(ENTITY_MANAGEMENT_ITEM);
 

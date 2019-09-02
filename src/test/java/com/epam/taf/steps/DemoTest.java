@@ -41,7 +41,7 @@ public class DemoTest {
         steps.saveNewPersonWithoutRequiredField();
         //steps.isUserStayedOnCreatePersonPage();
         Assert.assertTrue(steps.isValidationMessageReturns(VALIDATION_MESSAGE));
-        Assert.assertTrue(steps.isUserStayedOnCreateNewPersonURL(CREATE_NEW_PERSON_URL));
+        Assert.assertTrue(steps.isUserStayedOnCreateNewPersonURL(CREATE_NEW_PERSON_URL), "...");
         Assert.assertTrue(steps.isPageTitleNotChanged(CREATE_PERSON_PAGE_TITLE));
     }
 
