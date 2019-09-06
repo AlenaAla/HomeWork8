@@ -28,9 +28,9 @@ public class CreateNewUserPage extends AbstractPage {
     @FindBy(id="lastNm")
     private WebElement lastName;
 
-    @FindBy(id="loginPage")
-    private  Select loginPage;
-    //private  WebElement loginPage;
+    @FindBy(name="loginPage")
+    private  WebElement loginPageDropdown;
+    //private  WebElement loginPageDropdown;
 
     //@FindBy(xpath = "//option[contains(text(), 'Main Case Search')]")
     //private WebElement mainCaseSearch;
@@ -41,7 +41,7 @@ public class CreateNewUserPage extends AbstractPage {
     private WebElement saveButton;
 
     @FindBy(name="courtIDs")
-    private  Select courts;//add implementions
+    private  WebElement courts;//add implementions
 
 
 
@@ -62,21 +62,21 @@ public class CreateNewUserPage extends AbstractPage {
                 .sendKeys(firstName, "Alena")
                 .sendKeys(lastName, "Alakayeva").build().perform();
 
-                loginPage.selectByVisibleText("Main Case Search");
+                new Select(loginPageDropdown).selectByVisibleText("Main Case Search");
                 //
                 //waitForElementEnabled(MAIN_CASE_SEARCH_LOCATOR);
 
                 //new Select(driver.findElement(MAIN_CASE_SEARCH_LOCATOR)).selectByVisibleText("Main Case Search");
                // .click((mainCaseSearch)).build().perform();
 
-        List<WebElement> courtsOptions = courts.getOptions();
+        List<WebElement> courtsOptions = new Select(courts).getOptions();
 
         ArrayList<String> expectedOptions = new ArrayList<String>();
         expectedOptions.add("Court of Appeals");
         expectedOptions.add("Supreme Court");
         Actions actions = new Actions(driver);
 
-       for (int i = 0; i <= courtsOptions.size(); i++)
+       for (int i = 0; i < courtsOptions.size(); i++)
        {
            WebElement optionElement = courtsOptions.get(i);
            String actualOption = optionElement.getText();
