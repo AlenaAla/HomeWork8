@@ -17,7 +17,10 @@ public class AbstractPage {
         PageFactory.initElements(this.driver, this);
     }
 
-    protected void waitForElementVisible(By locator) {
+    protected void waitForElementVisible1(WebElement webElement) {
+        new WebDriverWait(driver, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOfAllElements(webElement));
+    }
+    protected void waitForElementVisible2(By locator) {
         new WebDriverWait(driver, DEFAULT_TIMEOUT).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 

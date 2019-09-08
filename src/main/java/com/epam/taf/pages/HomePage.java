@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.annotations.Test;
+
 
 public class HomePage extends AbstractPage {
 
@@ -16,13 +16,13 @@ public class HomePage extends AbstractPage {
     @FindBy (xpath = "//a[@href='/ctrack/menu.do?menuHeaderID=4']")
     private WebElement administrativeTopMenu;
 
-    //@FindBy(xpath = "//div[@class='menu-header-dropdown menu-selected']/a[contains(text(),'Entity Management')]")
-    //@FindBy (xpath = "//a[@href='/ctrack/actor/menu.jsp?action=readonly'][@class='first-menu'])")
-    //private WebElement EntityManagementMenuUnderTopMenu;
-    //private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//a[@href='/ctrack/actor/menu.jsp?action=readonly'][@class='first-menu'])");
-    private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//a[@href='/ctrack/admin/menuUserAdmin.jsp?action=readonly'][@onclick='menuHeaderClose();']");
-    // href="/ctrack/admin/menuUserAdmin.jsp?action=readonly
-    //private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//div[@class='menu-header-dropdown menu-selected']/a[contains(text(),'Entity Management')]");
+
+    @FindBy (xpath = "//a[@href='/ctrack/admin/menuUserAdmin.jsp?action=readonly'][@onclick='menuHeaderClose();']")
+    private WebElement userAdminMenuUnderTopMenu;//1-st option
+
+
+   // private static final By ENTITY_MANAGEMENT_ITEM = By.xpath("//a[@href='/ctrack/admin/menuUserAdmin.jsp?action=readonly'][@onclick='menuHeaderClose();']");//2-nd option
+
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -33,15 +33,19 @@ public class HomePage extends AbstractPage {
     }
 
     public void openEntityManagementViaTopMenu() {
-        //administrativeTopMenu.click();
 
-        //new Actions(driver).click(administrativeTopMenu).build().perform();
-        new Actions(driver).moveToElement(administrativeTopMenu).click(driver.findElement(ENTITY_MANAGEMENT_ITEM)).build().perform();
 
-        //waitForElementVisible(ENTITY_MANAGEMENT_ITEM);
+        new Actions(driver).moveToElement(administrativeTopMenu).perform();//for both 1-st and 2-nd options
+        waitForElementVisible1(userAdminMenuUnderTopMenu);//1-nd option
+
+        //waitForElementVisible2(ENTITY_MANAGEMENT_ITEM);//2-nd option
+
+        userAdminMenuUnderTopMenu.click();//1-st option
+
+        //driver.findElement(ENTITY_MANAGEMENT_ITEM).click();//2-nd option
 
         //new Actions(driver).moveToElement(driver.findElement(ENTITY_MANAGEMENT_ITEM)).build().perform();
-        //new Actions(driver).moveToElement(administrativeTopMenu).click(EntityManagementMenuUnderTopMenu).build().perform();
+        //new Actions(driver).moveToElement(administrativeTopMenu).click(userAdminMenuUnderTopMenu).build().perform();//does not work without wait
 
           }
 
